@@ -1,0 +1,27 @@
+.App {
+  text-align: center;
+}
+
+.hover_bottom,.hover_left {
+  padding: 1rem 2rem;
+}
+
+.hover_left:hover {
+  color: rgb(40, 173, 218);
+  border-left: 3px solid rgb(40, 173, 218);
+  cursor: pointer;
+}
+
+.hover_bottom:hover {
+  color: rgb(40, 173, 218);
+  border-bottom: 2px solid rgb(40, 173, 218);
+  cursor: pointer;
+}
+
+.negativeZIndex{
+  z-index: -1;
+}
+.dashboard_focus{
+  color: rgb(40, 173, 218);
+  border-bottom: 2px solid rgb(40, 173, 218);
+}
