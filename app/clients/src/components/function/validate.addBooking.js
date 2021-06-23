@@ -1,7 +1,7 @@
 export function ValidateAddBooking(input){
     var checkin = new Date(input.StartAt)
     var checkout = new Date(input.checkOutAt)
-    var today = new Date
+    var today = new Date()
     if (checkin < today){
         return [false,'Check in must be greater or equal today']
     }
@@ -10,12 +10,6 @@ export function ValidateAddBooking(input){
     }
     else if (checkout < checkin){
         return [false,'Check out must greater or equal checkin']
-    }
-    else if (!input.number){
-        return [false,'Choose room']
-    }
-    else if (!input.number){
-        return [false,'Choose floor']
     }
     else if (!input.name){
         return [false,'Name is empty']
@@ -29,5 +23,5 @@ export function ValidateAddBooking(input){
     else if (!input.identify){
         return [false,'Identify is empty']
     }
-    return true
+    return [true]
 }
