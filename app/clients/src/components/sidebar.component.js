@@ -16,12 +16,13 @@ const SideBarStyle = makeStyles((theme) => ({
         flexDirection:'column',
         flexWrap:'wrap',
         width:'100%',
-        height:'100vh',
+        height:'100%',
         paddingTop : '.8rem'
     }
   }));
-export function BookingSideBar(){
+export function BookingSideBar(props){
     const classes = SideBarStyle()
+    const {roomSelected} = props
     const [open,setOpen] = useState(false)
     const handleClickOpen = () => {
       setOpen(true);
@@ -59,13 +60,12 @@ export function BookingSideBar(){
                     </List>
                 </Box>
             </Box>
-            <AddBookings handleClose={handleClose} open={open} />
+            <AddBookings handleClose={handleClose} roomSelected={roomSelected} open={open} />
         </React.Fragment>
     )
 }
 export function InvoiceSideBar(props){
     const classes = SideBarStyle()
-    const {setFilter} = props
     return (
         <Box className={classes.container} boxShadow={2}>
             <Box width='100%'>
@@ -99,7 +99,6 @@ export function InvoiceSideBar(props){
 
 export function RoomSideBar(props){
     const classes = SideBarStyle()
-    const {setFilter} = props
     return (
         <Box className={classes.container} boxShadow={2} >
             <Box width='100%' >
@@ -138,7 +137,6 @@ export function RoomSideBar(props){
 }
 export function ServiceSideBar(props){
     const classes = SideBarStyle()
-    const {setFilter} = props
     return (
         <Box className={classes.container} boxShadow={2} >
             <Box width='100%' >
