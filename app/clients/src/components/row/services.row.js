@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {TableRow,TableCell,Checkbox,Collapse,Typography,Box,Table,TableBody,TableHead,makeStyles,} from "@material-ui/core";
+
 import { ExpandLessOutlined, ExpandMoreOutlined } from "@material-ui/icons";
 import ServiceApiCall from "../../apiCall/service.api";
 
@@ -100,6 +101,7 @@ export default function ServiceRow(props) {
       <TableRow
         hover
         onClick={(event) => handleClick(event, row)}
+        onClick={(event) => handleClick(event, row)}
         role="checkbox"
         aria-checked={isItemSelected}
         tabIndex={-1}
@@ -130,7 +132,6 @@ export default function ServiceRow(props) {
                 </Typography>
               ) : (
                 <Box
-                  d
                   display="flex"
                   flexWrap="wrap"
                   justifyContent="flex-end"
