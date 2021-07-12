@@ -6,11 +6,12 @@ function createWindown(){
         width:1600,
         height:1400,
         webPreferences:{
-            nodeIntegration:true,
+            nodeIntegration:false,
+            allowEval: false,
         }
     })
 
-    win.loadURL('http:localhost:3000')
+    win.loadURL('http:127.0.0.1:3000')
 
     const content = win.webContents
     console.log(content)

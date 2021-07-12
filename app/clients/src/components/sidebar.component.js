@@ -1,8 +1,20 @@
 import {Box,List,ListSubheader,ListItem,ListItemIcon,ListItemText,makeStyles} from '@material-ui/core'
-import {AttachMoney,MoneyOff,RoomServiceOutlined,BorderColorOutlined} from '@material-ui/icons';
+import {AttachMoney,MoneyOff,RoomServiceOutlined,BorderColorOutlined,Search} from '@material-ui/icons';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'; 
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import UpdateIcon from '@material-ui/icons/Update';
+import FilterNoneIcon from '@material-ui/icons/FilterNone';
+import Filter1Icon from '@material-ui/icons/Filter1';
+import Filter2Icon from '@material-ui/icons/Filter2';
+import RoomServiceRoundedIcon from '@material-ui/icons/RoomServiceRounded';
 import React,{useState} from 'react';
 import AddBookings from './dialog/addBooking';
 import EditBookings from './dialog/editBooking';
+import AddCommentTwoToneIcon from '@material-ui/icons/AddCommentTwoTone';
+import DnsTwoToneIcon from '@material-ui/icons/DnsTwoTone';
+import EmojiFoodBeverageTwoToneIcon from '@material-ui/icons/EmojiFoodBeverageTwoTone';
+
+import Warning from './dialog/warning';
 const SideBarStyle = makeStyles((theme) => ({
     root: {
       width: '100%',
@@ -28,19 +40,30 @@ export function BookingSideBar(props){
     const {roomSelected,bookingSelected} = props
     const [openAddBooking,setOpenAddBooking] = useState(false)
     const [openEditBooking,setOpenEditBooking] = useState(false)
+    const [openWarning,setOpenWarning] = useState(false)
     const AddBookingOpen = () => {
-        setOpenAddBooking(true);
+        if (roomSelected.length)
+            setOpenAddBooking(true);
+        else
+            setOpenWarning(true)
+        
     };
   
     const AddBookingClose = () => {
         setOpenAddBooking(false);
     };
     const EditBookingOpen = () => {
-        setOpenEditBooking(true);
+        if (bookingSelected.length)
+            setOpenEditBooking(true);
+        else
+            setOpenWarning(true)
     };
   
     const EditBookingClose = () => {
         setOpenEditBooking(false);
+    };
+    const WarningClose = () => {
+        setOpenWarning(false);
     };
     return (
         <React.Fragment>
@@ -58,27 +81,28 @@ export function BookingSideBar(props){
                         >
                         <ListItem button className='hover_left' onClick={AddBookingOpen} >
                             <ListItemIcon>
-                            <AttachMoney />
+                            <AddCommentTwoToneIcon />
                             </ListItemIcon>
                             <ListItemText primary="Add Booking" />
                         </ListItem>
                         <ListItem button className='hover_left' >
                             <ListItemIcon>
-                            <RoomServiceOutlined />
+                            <EmojiFoodBeverageTwoToneIcon />
                             </ListItemIcon>
                             <ListItemText primary="Add service" />
                         </ListItem>
                         <ListItem button className='hover_left' onClick={EditBookingOpen} >
                             <ListItemIcon>
-                            <BorderColorOutlined />
+                            <DnsTwoToneIcon />
                             </ListItemIcon>
                             <ListItemText primary="Update Booking" />
                         </ListItem>
                     </List>
                 </Box>
             </Box>
-            <AddBookings handleClose={AddBookingClose} roomSelected={roomSelected} open={openAddBooking} />
-            <EditBookings handleClose={EditBookingClose} bookingSelected={bookingSelected} open={openEditBooking} />
+                <AddBookings handleClose={AddBookingClose} roomSelected={roomSelected} open={openAddBooking} />
+                <EditBookings handleClose={EditBookingClose}  bookingSelected={bookingSelected} open={openEditBooking} />
+                <Warning handleClose={WarningClose} open={openWarning}></Warning>
         </React.Fragment>
     )
 }
@@ -92,22 +116,22 @@ export function InvoiceSideBar(props){
                     aria-labelledby="nested-list-subheader"
                     subheader={
                         <ListSubheader component="div" id="nested-list-subheader" style={{'fontSize':'1.2rem'}}>
-                        <b>Filter</b>
+                        <b>Chức năng khác</b>
                         </ListSubheader>
                     }
                     className={classes.root}
                     >
                     <ListItem button className='hover_left'>
                         <ListItemIcon>
-                        <AttachMoney />
+                        <Filter1Icon />
                         </ListItemIcon>
-                        <ListItemText primary="Staff name" />
+                        <ListItemText primary="Option 1" />
                     </ListItem>
                     <ListItem button className='hover_left'>
                         <ListItemIcon>
-                        <MoneyOff />
+                        <Filter2Icon />
                         </ListItemIcon>
-                        <ListItemText primary="Date" />
+                        <ListItemText primary="Option 2" />
                     </ListItem>
                 </List>
             </Box>
@@ -132,21 +156,21 @@ export function RoomSideBar(props){
                     >
                     <ListItem button className='hover_left' >
                         <ListItemIcon>
-                        <AttachMoney />
+                        <RoomServiceRoundedIcon />
                         </ListItemIcon>
-                        <ListItemText primary="Category 1" />
+                        <ListItemText primary="Dịch vụ 1" />
                     </ListItem>
                     <ListItem button className='hover_left' >
                         <ListItemIcon>
-                        <MoneyOff />
+                        <RoomServiceRoundedIcon />
                         </ListItemIcon>
-                        <ListItemText primary="Category 2" />
+                        <ListItemText primary="Dịch vụ 2" />
                     </ListItem>
                     <ListItem button className='hover_left' >
                         <ListItemIcon>
-                        <MoneyOff />
+                        <RoomServiceRoundedIcon />
                         </ListItemIcon>
-                        <ListItemText primary="Category 3" />
+                        <ListItemText primary="Dịch vụ 3" />
                     </ListItem>
                 </List>
             </Box>
@@ -156,7 +180,6 @@ export function RoomSideBar(props){
 
 export function ServiceSideBar(props){
     const classes = SideBarStyle()
-    const {setFilter} = props
     return (
         <Box className={classes.container} boxShadow={2} >
             <Box width='100%' >
@@ -172,25 +195,25 @@ export function ServiceSideBar(props){
                     >
                     <ListItem button className='hover_left' >
                         <ListItemIcon>
-                        <AttachMoney />
+                        <AddCircleOutlineIcon />
                         </ListItemIcon>
                         <ListItemText primary="Add" />
                     </ListItem>
                     <ListItem button className='hover_left' >
                         <ListItemIcon>
-                        <MoneyOff />
+                        <HighlightOffIcon />
                         </ListItemIcon>
                         <ListItemText primary="Delete" />
                     </ListItem>
                     <ListItem button className='hover_left' >
                         <ListItemIcon>
-                        <MoneyOff />
+                        <UpdateIcon />
                         </ListItemIcon>
                         <ListItemText primary="Update" />
                     </ListItem>
                     <ListItem button className='hover_left' >
                         <ListItemIcon>
-                        <MoneyOff />
+                        <FilterNoneIcon />
                         </ListItemIcon>
                         <ListItemText primary="Filter" />
                     </ListItem>
